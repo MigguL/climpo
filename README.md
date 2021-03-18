@@ -1,5 +1,7 @@
 # climpo
 
+Climpo is a weather app created as my Data Management Course Assignment
+
 ## Project setup
 ```
 npm install
