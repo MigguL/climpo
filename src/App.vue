@@ -1,6 +1,12 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div class="main">
+    <Modal
+      v-if="modalOpen"
+      v-on:close-modal="toggleModal"
+      v-bind:API_KEY="API_KEY"
+    />
+    <Navigation v-on:add-city="toggleModal" v-on:edit-city="toggleEdit" />
+    <router-view v-bind:locations="locations" v-bind:edit="edit" />
   </div>
 </template>
 
@@ -8,13 +14,20 @@
 import axios from "axios";
 import db from "./firebase/firebaseinit";
 import API_KEY from "./credentials/credentials";
+import Navigation from "./components/Navigation";
+import Modal from "./components/Modal";
 export default {
   name: "App",
+  components: {
+    Navigation,
+    Modal,
+  },
   data() {
     return {
       API_KEY: API_KEY,
-      location: "Lublin",
       locations: [],
+      modalOpen: null,
+      edit: null,
     };
   },
   created() {
@@ -26,12 +39,12 @@ export default {
 
       firebaseDB.onSnapshot((snap) => {
         snap.docChanges().forEach(async (doc) => {
-          if (doc.type === "added") {
+          if (doc.type === "added" && !doc.doc.Nd) {
             try {
               const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${
                   doc.doc.data().location
-                }&appid=${API_KEY}`
+                }&units=metric&appid=${API_KEY}`
               );
               const data = response.data;
               firebaseDB
@@ -41,16 +54,25 @@ export default {
                 })
                 .then(() => {
                   this.locations.push(doc.doc.data());
-                })
-                .then(() => {
-                  console.log(this.locations);
                 });
             } catch (err) {
               console.log(err);
             }
+          } else if (doc.type === "added" && doc.doc.Nd) {
+            this.locations.push(doc.doc.data());
+          } else if (doc.type === "removed") {
+            this.locations = this.locations.filter(
+              (location) => location.location !== doc.doc.data().location
+            );
           }
         });
       });
+    },
+    toggleModal() {
+      this.modalOpen = !this.modalOpen;
+    },
+    toggleEdit() {
+      this.edit = !this.edit;
     },
   },
 };
@@ -62,5 +84,15 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+}
+
+.main {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.container {
+  padding: 0 20px;
 }
 </style>
