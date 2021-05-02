@@ -1,5 +1,5 @@
 <template>
-  <div class="city">
+  <div @click="goToWeather" class="city">
     <i
       v-if="edit"
       @click="removeCity"
@@ -56,6 +56,18 @@ export default {
         .then(() => {
           db.collection("locations").doc(this.id).delete();
         });
+    },
+    goToWeather(event) {
+      if (event.target === this.$refs.edit) {
+        //
+      } else {
+        this.$router.push({
+          name: "Weather",
+          params: {
+            location: this.location.location,
+          },
+        });
+      }
     },
   },
 };

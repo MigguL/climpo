@@ -6,7 +6,11 @@
       v-bind:API_KEY="API_KEY"
     />
     <Navigation v-on:add-city="toggleModal" v-on:edit-city="toggleEdit" />
-    <router-view v-bind:locations="locations" v-bind:edit="edit" />
+    <router-view
+      v-bind:locations="locations"
+      v-bind:edit="edit"
+      v-bind:API_KEY="API_KEY"
+    />
   </div>
 </template>
 
