@@ -85,6 +85,9 @@ export default {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+body {
+  background-color: #e7e5e5;
+}
 
 .main {
   max-width: 1024px;

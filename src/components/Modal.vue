@@ -59,18 +59,20 @@ export default {
   z-index: 101;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
+  max-width: 1024px;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
   label {
     color: #fff;
   }
   .modal-wrap {
-    max-width: 500px;
     border-radius: 8px;
     width: 80%;
+    max-width: 500px;
     padding: 20px;
     background-color: #31363d;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
