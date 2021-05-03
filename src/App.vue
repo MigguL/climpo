@@ -5,11 +5,22 @@
       v-on:close-modal="toggleModal"
       v-bind:API_KEY="API_KEY"
     />
-    <Navigation v-on:add-city="toggleModal" v-on:edit-city="toggleEdit" />
+    <Navigation
+      v-on:add-city="toggleModal"
+      v-on:edit-city="toggleEdit"
+      v-bind:addCityActive="addCityActive"
+      v-bind:isDay="isDay"
+      v-bind:isNight="isNight"
+    />
     <router-view
+      v-bind:isDay="isDay"
+      v-bind:isNight="isNight"
       v-bind:locations="locations"
       v-bind:edit="edit"
       v-bind:API_KEY="API_KEY"
+      v-on:is-day="dayTime"
+      v-on:is-night="nightTime"
+      v-on:resetDays="resetDays"
     />
   </div>
 </template>
@@ -32,10 +43,14 @@ export default {
       locations: [],
       modalOpen: null,
       edit: null,
+      addCityActive: null,
+      isDay: null,
+      isNight: null,
     };
   },
   created() {
     this.getLocationWeather();
+    this.checkRoute();
   },
   methods: {
     getLocationWeather() {
@@ -48,7 +63,7 @@ export default {
               const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${
                   doc.doc.data().location
-                }&units=metric&appid=${API_KEY}`
+                }&units=metric&lang=pl&appid=${API_KEY}`
               );
               const data = response.data;
               firebaseDB
@@ -78,6 +93,28 @@ export default {
     toggleEdit() {
       this.edit = !this.edit;
     },
+    checkRoute() {
+      if (this.$route.name === "AddCity") {
+        this.addCityActive = true;
+      } else {
+        this.addCityActive = false;
+      }
+    },
+    dayTime() {
+      this.isDay = !this.isDay;
+    },
+    nightTime() {
+      this.isNight = !this.isNight;
+    },
+    resetDays() {
+      this.isDay = false;
+      this.isNight = false;
+    },
+  },
+  watch: {
+    $route() {
+      this.checkRoute();
+    },
   },
 };
 </script>
@@ -101,5 +138,18 @@ body {
 
 .container {
   padding: 0 20px;
+}
+
+.day {
+  transition: 500ms ease all;
+  background-color: rgb(59, 150, 249);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.night {
+  transition: 500ms ease all;
+  background-color: rgb(20, 42, 95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 </style>

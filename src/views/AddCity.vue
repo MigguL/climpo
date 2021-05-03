@@ -16,9 +16,7 @@ import City from "../components/City";
 export default {
   name: "AddCity",
   props: ["locations", "edit"],
-  created() {
-    console.log(this.locations);
-  },
+  created() {},
   components: {
     City,
   },

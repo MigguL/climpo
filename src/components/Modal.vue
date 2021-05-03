@@ -36,7 +36,7 @@ export default {
         alert("pole nie może być puste");
       } else {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=${this.API_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&lang=pl&appid=${this.API_KEY}`
         );
         const data = await response.data;
         db.collection("locations")
