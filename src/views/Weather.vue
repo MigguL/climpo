@@ -17,6 +17,7 @@
           :isNight="isNight"
           :currWeather="currWeather"
         />
+        <HourlyWeather :forecast="forecast" />
       </div>
     </div>
   </div>
@@ -26,11 +27,13 @@
 import axios from "axios";
 import db from "../firebase/firebaseinit";
 import CurrentWeather from "../components/CurrentWeather";
+import HourlyWeather from "../components/HourlyWeather";
 export default {
   name: "Weather",
   props: ["API_KEY", "isDay", "isNight"],
   components: {
     CurrentWeather,
+    HourlyWeather,
   },
   data() {
     return {
