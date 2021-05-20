@@ -19,7 +19,7 @@ import db from "../firebase/firebaseinit";
 
 export default {
   name: "Modal",
-  props: ["API_KEY"],
+  props: ["API_KEY", "locations"],
   data() {
     return {
       city: "",
@@ -34,20 +34,28 @@ export default {
     async addCity() {
       if (this.city === "") {
         alert("pole nie może być puste");
+      } else if (
+        this.locations.some((res) => res.location === this.city.toLowerCase())
+      ) {
+        alert(`${this.city} znajduje się już na liście obserwowanych miast`);
       } else {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&lang=pl&appid=${this.API_KEY}`
-        );
-        const data = await response.data;
-        db.collection("locations")
-          .doc()
-          .set({
-            location: this.city,
-            currWeather: data,
-          })
-          .then(() => {
-            this.$emit("close-modal");
-          });
+        try {
+          const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&lang=pl&appid=${this.API_KEY}`
+          );
+          const data = await response.data;
+          db.collection("locations")
+            .doc()
+            .set({
+              location: this.city.toLowerCase(),
+              currWeather: data,
+            })
+            .then(() => {
+              this.$emit("close-modal");
+            });
+        } catch {
+          alert(`${this.city} nie istnieje, spróbuj ponownie`);
+        }
       }
     },
   },
