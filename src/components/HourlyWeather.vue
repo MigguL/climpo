@@ -20,12 +20,10 @@ export default {
   components: {
     HourlyTemperature,
   },
-  created() {
-    console.log(this.forecast);
-  },
+  created() {},
   computed: {
     filteredList() {
-      return this.forecast.hourly.slice(0, 23);
+      return this.forecast.hourly.slice(0, 24);
     },
   },
 };
@@ -40,7 +38,7 @@ export default {
     max-width: 100vw;
     overflow: scroll;
     padding: 0;
-    margin: 0 35px;
+    margin: 0 20px;
     overflow-y: hidden;
 
     &::-webkit-scrollbar {

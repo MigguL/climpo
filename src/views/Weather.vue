@@ -18,6 +18,8 @@
           :currWeather="currWeather"
         />
         <HourlyWeather :forecast="forecast" />
+        <WeeklyForecast :forecast="forecast" />
+        <AdditionalInfo :currWeather="currWeather" />
       </div>
     </div>
   </div>
@@ -28,12 +30,16 @@ import axios from "axios";
 import db from "../firebase/firebaseinit";
 import CurrentWeather from "../components/CurrentWeather";
 import HourlyWeather from "../components/HourlyWeather";
+import WeeklyForecast from "../components/WeeklyForecast";
+import AdditionalInfo from "../components/AdditionalInfo";
 export default {
   name: "Weather",
   props: ["API_KEY", "isDay", "isNight"],
   components: {
     CurrentWeather,
     HourlyWeather,
+    WeeklyForecast,
+    AdditionalInfo,
   },
   data() {
     return {
@@ -100,7 +106,7 @@ export default {
     }
   }
   display: flex;
-  height: 100%;
+
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -117,13 +123,17 @@ export default {
 }
 .weather {
   transition: 500ms ease;
-  // overflow: scroll;
+  overflow: scroll;
   width: 100%;
   height: 100%;
-
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .weather-wrap {
     overflow: hidden;
     max-width: 1024px;
+
     margin: 0 auto;
   }
 }
