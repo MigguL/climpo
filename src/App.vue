@@ -181,7 +181,7 @@ body {
     display: block;
     width: 60px;
     height: 60px;
-    margin: 40vh auto;
+    margin: 45vh auto;
     border: 2px solid transparent;
     border-top-color: #142a5f;
     border-radius: 50%;

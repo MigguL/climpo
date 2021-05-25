@@ -46,9 +46,7 @@
 export default {
   name: "AdditionalInfo",
   props: ["currWeather"],
-  created() {
-    console.log(this.currWeather);
-  },
+  created() {},
 };
 </script>
 

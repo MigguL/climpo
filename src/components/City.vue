@@ -19,14 +19,13 @@
       />
     </div>
     <div class="video">
-      <video
-        autoplay
-        loop
-        muted
+      <img
         :src="
-          require(`../../public/videos/${this.location.currWeather.weather[0].icon}.mp4`)
+          require(`../../public/images/${this.location.currWeather.weather[0].icon}.jpeg`)
         "
-      ></video>
+        alt=""
+      />
+
       <div class="bg-overlay"></div>
     </div>
   </div>
@@ -93,6 +92,7 @@ export default {
     position: absolute;
     bottom: 0px;
     left: 0px;
+    cursor: pointer;
   }
 
   span {
@@ -108,6 +108,7 @@ export default {
     justify-content: flex-end;
     align-items: flex-end;
     flex: 1;
+    cursor: pointer;
 
     span {
       font-size: 35px;

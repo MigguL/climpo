@@ -2,10 +2,13 @@
   <div>
     <header v-if="addCityActive" class="container add-location">
       <nav>
-        <span> Dodaj miasto </span>
+        <div class="left">
+          <span> climpo</span>
+          <i class="fas fa-umbrella"></i>
+        </div>
         <div class="right">
           <i @click="editCities" ref="editCities" class="far fa-edit"></i>
-          <i @click="reloadApp" class="fas fa-sync"></i>
+          <i @click="reloadApp" class="fas fa-redo-alt"></i>
           <i @click="addCity" class="fas fa-plus"></i>
         </div>
       </nav>
@@ -80,9 +83,18 @@ header {
     color: #fff;
   }
 
+  .left {
+    cursor: default;
+    i {
+      font-size: 20px;
+      margin-left: 8px;
+    }
+  }
+
   .right {
     i {
       font-size: 20px;
+      cursor: pointer;
     }
     i:nth-child(2),
     i:nth-child(3) {

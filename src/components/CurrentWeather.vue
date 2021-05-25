@@ -25,10 +25,10 @@
           {{ Math.round(this.currWeather.main.feels_like) }}&deg; C</span
         >
       </div>
-      <div class="weather-icon">
+      <!-- <div class="weather-icon">
         <img v-if="isDay" src="../../public/sun.png" alt="" />
         <img v-if="isNight" src="../../public/moon.png" alt="" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
   margin-top: 90px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   .container {
-    margin: 30px 0;
+    margin: 0px auto;
     min-height: 366px;
     position: relative;
     display: flex;

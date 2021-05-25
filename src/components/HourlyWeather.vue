@@ -31,7 +31,8 @@ export default {
 
 <style lang="scss" scoped>
 .hourly-weather {
-  padding: 30px 0;
+  padding: 30px 5px;
+  margin-bottom: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   .container {
     display: flex;

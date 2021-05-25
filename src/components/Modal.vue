@@ -7,6 +7,7 @@
         name="city-name"
         placeholder="Nazwa szukanego miasta"
         v-model="city"
+        autocomplete="off"
       />
       <button @click="addCity">Dodaj</button>
     </div>

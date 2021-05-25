@@ -35,6 +35,9 @@ export default {
 </script>
 
 <style lang="scss">
+p {
+  cursor: default;
+}
 .grid {
   display: grid;
   padding-top: 81px;
