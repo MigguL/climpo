@@ -64,12 +64,13 @@ export default {
           docs.forEach((doc) => {
             this.currWeather = doc.data().currWeather;
             axios
+              // Display detailed data
               .get(
                 `https://api.openweathermap.org/data/2.5/onecall?lat=${
                   doc.data().currWeather.coord.lat
                 }&lon=${
                   doc.data().currWeather.coord.lon
-                }&exclude=current,minutley,alerts&units=metric&lang=pl&appid=${
+                }&exclude=current,minutely,alerts&units=metric&lang=pl&appid=${
                   this.API_KEY
                 }`
               )
@@ -80,6 +81,7 @@ export default {
                 this.loading = false;
                 this.getCurrentTime();
               });
+            console.log("Weather.vue API CALL DONE");
           });
         });
     },

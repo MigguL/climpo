@@ -71,6 +71,7 @@ export default {
         snap.docChanges().forEach(async (doc) => {
           if (doc.type === "added" && !doc.doc.Nd) {
             try {
+              // Display cities from DB
               const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${
                   doc.doc.data().location
@@ -98,6 +99,7 @@ export default {
           }
         });
       });
+      console.log("App.vue API CALL DONE");
     },
     toggleModal() {
       this.modalOpen = !this.modalOpen;

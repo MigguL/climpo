@@ -41,9 +41,11 @@ export default {
         alert(`${this.city} znajduje się już na liście obserwowanych miast`);
       } else {
         try {
+          // Add city to the DB
           const response = await axios.get(
             `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&lang=pl&appid=${this.API_KEY}`
           );
+
           const data = await response.data;
           db.collection("locations")
             .doc()
@@ -58,6 +60,7 @@ export default {
           alert(`${this.city} nie istnieje, spróbuj ponownie`);
         }
       }
+      console.log("Modal.vue API CALL DONE");
     },
   },
 };
